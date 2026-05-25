@@ -1,10 +1,11 @@
 import express from "express";
 import cors from "cors";
+import userRouter from "./routes/user.routes.js";
 
 const app = express();
 
 
-//middlewares
+// middlewares
 app.use(cors());
 
 app.use(express.json());
@@ -14,7 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 
-//routes
+// routes
 app.get("/", (req, res) => {
   res.send("Roommate Manager API Running...");
 });
@@ -25,5 +26,7 @@ app.get("/health", (req, res) => {
     message: "Server is healthy"
   });
 });
+
+app.use("/api/v1/users", userRouter);
 
 export default app;
